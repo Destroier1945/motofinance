@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:motofinance/utils/earn_button.dart';
+import 'package:motofinance/utils/km_button.dart';
+import 'package:motofinance/utils/km_button_final.dart';
+import 'package:motofinance/utils/spending_button.dart';
 import '../registro_diario.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,11 +19,12 @@ class _HomePageState extends State<HomePage> {
       kmFinal: 0,
       ganhos: List.empty(growable: true),
       despesas: List.empty(growable: true));
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Deliver Boys"),
+        title: const Text("Deliver Drivers"),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -34,7 +39,7 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(fontSize: 32),
                 ),
               ),
-              Container(
+              SizedBox(
                 height: 360,
                 width: 720,
                 child: Image.asset("assets/images/charts.png"),
@@ -45,30 +50,8 @@ class _HomePageState extends State<HomePage> {
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      children: [
-                        Text(
-                          'Km inicial',
-                          style: TextStyle(fontSize: 32),
-                        ),
-                        Text(
-                          '2324',
-                          style: TextStyle(fontSize: 32),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Text(
-                          'Km final',
-                          style: TextStyle(fontSize: 32),
-                        ),
-                        Text(
-                          '----',
-                          style: TextStyle(fontSize: 32),
-                        )
-                      ],
-                    )
+                    KmButton(),
+                    KmButtonFinal(),
                   ],
                 ),
               ),
@@ -80,18 +63,10 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
-                      children: [
-                        Text(
-                          "Ganhos",
-                          style: TextStyle(fontSize: 32),
-                        ),
-                        Text(
-                          "189,90",
-                          style: TextStyle(fontSize: 32),
-                        )
-                      ],
+                      children: [EarnButton()],
                     ),
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
                           'Km rodado',
@@ -107,22 +82,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               const Divider(),
-              Container(
-                padding: const EdgeInsets.only(left: 24, right: 24),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Despesas',
-                      style: TextStyle(fontSize: 24),
-                    ),
-                    Text(
-                      '65,49',
-                      style: TextStyle(fontSize: 24),
-                    ),
-                  ],
-                ),
-              ),
+              const SpendingButton(),
               const Divider(),
               Container(
                 padding: const EdgeInsets.only(left: 24, right: 24),
