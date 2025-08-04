@@ -2,9 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:motofinance/pages/home_page.dart';
+import 'package:motofinance/registro_diario.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(create: (_) => RegistroDiario(),
+  child: MyApp(),
+  ));
 }
 
 class MyApp extends StatefulWidget {

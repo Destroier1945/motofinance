@@ -3,6 +3,7 @@ import 'package:motofinance/utils/earn_button.dart';
 import 'package:motofinance/utils/km_button.dart';
 import 'package:motofinance/utils/km_button_final.dart';
 import 'package:motofinance/utils/spending_button.dart';
+import 'package:provider/provider.dart';
 import '../registro_diario.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,18 +14,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var registroDiario = RegistroDiario(
-      dia: DateTime(2024, 9, 7),
-      kmInicial: 0,
-      kmFinal: 0,
-      ganhos: List.empty(growable: true),
-      despesas: List.empty(growable: true));
+
 
   @override
   Widget build(BuildContext context) {
+    final registroDiario = context.watch<RegistroDiario>();
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Deliver Drivers"),
+        title: const Text("Motolivery Finance"),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -47,34 +45,34 @@ class _HomePageState extends State<HomePage> {
               const Divider(),
               Container(
                 padding: const EdgeInsets.only(left: 24, right: 24),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     KmButton(),
-                    KmButtonFinal(),
+                    const KmButtonFinal(),
                   ],
                 ),
               ),
               const Divider(),
               Container(
                 padding: const EdgeInsets.only(left: 24, right: 24),
-                child: const Row(
+                child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
+                     Column(
                       children: [EarnButton()],
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Text(
+                        const Text(
                           'Km rodado',
                           style: TextStyle(fontSize: 32),
                         ),
                         Text(
-                          '112',
-                          style: TextStyle(fontSize: 32),
+                          '${registroDiario.kmFinal}',
+                          style: const TextStyle(fontSize: 32),
                         )
                       ],
                     )
@@ -86,16 +84,16 @@ class _HomePageState extends State<HomePage> {
               const Divider(),
               Container(
                 padding: const EdgeInsets.only(left: 24, right: 24),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       'Ganhos por km',
                       style: TextStyle(fontSize: 24),
                     ),
                     Text(
-                      '1,15',
-                      style: TextStyle(fontSize: 24),
+                      context.read<RegistroDiario>().getRendas.toString(),
+                      style: const TextStyle(fontSize: 24),
                     ),
                   ],
                 ),
@@ -103,16 +101,16 @@ class _HomePageState extends State<HomePage> {
               const Divider(),
               Container(
                 padding: const EdgeInsets.only(left: 24, right: 24),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       'Ganho liquido do dia',
                       style: TextStyle(fontSize: 24),
                     ),
                     Text(
-                      '122,34',
-                      style: TextStyle(fontSize: 24),
+                      '${registroDiario.ganhoDiario}',
+                      style: const TextStyle(fontSize: 24),
                     ),
                   ],
                 ),

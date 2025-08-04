@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../registro_diario.dart';
 
 class KmButton extends StatelessWidget {
-  const KmButton({super.key});
+   KmButton({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    final registroDiario = context.watch<RegistroDiario>();
+
+
     return GestureDetector(
+
       onTap: () {
+        final TextEditingController _controller = TextEditingController();
         showModalBottomSheet(
             context: context,
             builder: (context) {
@@ -20,9 +29,10 @@ class KmButton extends StatelessWidget {
                       style: TextStyle(fontSize: 16),
                     ),
                     const SizedBox(height: 12),
-                    const TextField(
+                    TextField(
+                      controller: _controller,
                       keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'Digite aqui para começar',
                         border: OutlineInputBorder(),
                       ),
@@ -31,7 +41,19 @@ class KmButton extends StatelessWidget {
                       height: 20,
                     ),
                     ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          var km = int.tryParse(_controller.text);
+                          if(km != null && km >= 0 )  {
+                            registroDiario.kmInicio = km;
+                            Navigator.pop(context);
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Por favor, insira um valor válido.'),
+                              ),
+                            );
+                          }
+                        },
                         child: const Text(
                           'Confirma',
                           style: TextStyle(fontSize: 24),
@@ -43,16 +65,16 @@ class KmButton extends StatelessWidget {
       },
       child: Container(
         alignment: Alignment.center,
-        child: const Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Km inicial',
               style: TextStyle(fontSize: 32),
             ),
             Text(
-              '2928',
-              style: TextStyle(fontSize: 32),
+              context.read<RegistroDiario>().kmInicial.toString(),
+              style: const TextStyle(fontSize: 32),
             ),
           ],
         ),
