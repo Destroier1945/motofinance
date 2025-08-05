@@ -44,7 +44,7 @@ class KmButton extends StatelessWidget {
                         onPressed: () {
                           var km = int.tryParse(_controller.text);
                           if(km != null && km >= 0 )  {
-                            registroDiario.kmInicio = km;
+                            context.read<RegistroDiario>().kmInicial;
                             Navigator.pop(context);
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -73,7 +73,7 @@ class KmButton extends StatelessWidget {
               style: TextStyle(fontSize: 32),
             ),
             Text(
-              context.read<RegistroDiario>().kmInicial.toString(),
+              context.watch()<RegistroDiario>().kmInicial.toString(),
               style: const TextStyle(fontSize: 32),
             ),
           ],

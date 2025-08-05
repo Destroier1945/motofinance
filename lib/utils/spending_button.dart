@@ -29,7 +29,7 @@ class SpendingButton extends StatelessWidget {
               style: TextStyle(fontSize: 24),
             ),
             Text(
-              'R\$ ${registroDiario.despesas}',
+              registroDiario.kmInicial.toString(),
               style: const TextStyle(fontSize: 24),
             ),
           ],
