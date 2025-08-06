@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(create: (_) => RegistroDiario(),
-  child: MyApp(),
+  child: const MyApp(),
   ));
 }
 
