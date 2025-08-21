@@ -1,12 +1,18 @@
 // ignore_for_file: unnecessary_const
 
 import 'package:flutter/material.dart';
-import 'package:motofinance/pages/home_page.dart';
-import 'package:motofinance/registro_diario.dart';
+import 'package:motofinance/providers/despesa_provider.dart';
+import 'package:motofinance/providers/ganho_provider.dart';
+import 'package:motofinance/providers/jornada_provider.dart';
+import 'package:motofinance/screens/home_page.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(create: (_) => RegistroDiario(),
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) => JornadaProvider()),
+    ChangeNotifierProvider(create: (_) => GahnoProvider()),
+    ChangeNotifierProvider(create: (_) => DespesaProvider()),
+  ],
   child: const MyApp(),
   ));
 }
